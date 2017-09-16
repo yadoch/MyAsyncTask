@@ -22,11 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void test(View view) {
         myAsyncTask = new MyAsyncTask();
-        myAsyncTask.execute();
-        //"brad","TCCA","OK"
+        myAsyncTask.execute("brad","TCCA","OK");
+        //
     }
-    //private class MyAsyncTask extends AsyncTask<String, Void, Void> {
-    private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+    private class MyAsyncTask extends AsyncTask<String, Void, Void> {
+    //private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -53,12 +53,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
-        //protected Void doInBackground(String... params) {
+        //protected Void doInBackground(Void... params) {
+        protected Void doInBackground(String... params) {
+            for(String name : params) {
 
-            Log.i("geoff", "doInBackground()!!");
-
-
+                Log.i("geoff", "doInBackground()!!"+name);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             return null;
         }
     }
